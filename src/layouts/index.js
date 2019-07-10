@@ -8,41 +8,29 @@ import intl from 'react-intl-universal';
 import { Button,LocaleProvider } from 'antd'
 
 
-const locales = {
-  en: en,
-  cn: cn
-};
-
-
 @connect(({ global }) => ({
   lang: global.lang
 }))
 class BasicLayout extends react.PureComponent {
   state = { initDone: false }
   componentDidMount() {
-    this.loadLocales();
+    const {dispatch,lang} =this.props
+    dispatch({
+      type:"global/changeLang",lang
+    })
   }
 
   i18n = (key) => {
     return intl.getHTML( key )
   }
-
-  loadLocales = () => {
-    let props = this.props
-    intl.init({
-      currentLocale: props.lang,
-      locales,
-    })
-      .then(() => {
-        this.setState({ initDone: true });
-      });
-
-  }
+  
   doChangeLang = () => {
     let props = this.props
     let lang = props.lang === 'cn' ? 'en' : 'cn'
-    localStorage.setItem("lang", lang)
-    window.location.reload();
+    const {dispatch} =this.props
+    dispatch({
+      type:"global/changeLang",lang
+    })
   }
   render() {
     let props = this.props
