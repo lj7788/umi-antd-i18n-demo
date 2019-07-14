@@ -15,8 +15,11 @@ class BasicLayout extends react.PureComponent {
   state = { initDone: false }
   componentDidMount() {
     const {dispatch,lang} =this.props
+    let cb=()=>{      
+      this.setState({initDone:true})
+    }
     dispatch({
-      type:"global/changeLang",lang
+      type:"global/changeLang",lang,cb
     })
   }
 
@@ -39,6 +42,10 @@ class BasicLayout extends react.PureComponent {
     return (
       <LocaleProvider locale={props.lang !== 'cn'?en:cn}>
       <div className={styles.normal}>
+         <div className="nav-menu">
+          <a href="/books">BookList</a>
+          <a href="/UserList">UserList</a>
+         </div>
         <Button className={styles.lang} onClick={this.doChangeLang}>{lang}</Button>
         <h1 className={styles.title}>{i18n('welcome')}</h1>
         {props.children}

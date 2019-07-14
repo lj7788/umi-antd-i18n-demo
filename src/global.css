@@ -6,3 +6,20 @@ html, body, #root {
 body {
   margin: 0;
 }
+.nav-menu{
+  text-align: left;
+  position: absolute;
+  top: 10px;
+  left: 10px;
+}
+.nav-menu a{
+  display:inline-block;
+  margin-right:5px;
+  color:#fff;
+}
+.toolbar{
+  padding:5px 0px;
+}
+.toolbar button{
+  margin-right:4px;
+}
